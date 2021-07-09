@@ -1,0 +1,11 @@
+version: '3' # specify docker-compose version we are using
+
+services:
+  redis-server:
+    image: 'redis' # tag or partial image ID.
+
+  node-app:
+    restart: 'always' # restart policy def ('no') | 'always' | 'on-failure' | 'unless-stopped'
+    build: . # path to our custom image
+    ports: # port mapping
+      - '4001:8081'

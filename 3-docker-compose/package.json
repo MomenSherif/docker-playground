@@ -1,0 +1,16 @@
+{
+  "name": "3-docker-compose",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Momen Sherif",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "redis": "^3.1.2"
+  }
+}
