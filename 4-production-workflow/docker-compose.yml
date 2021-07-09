@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  react-app:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules # flag to not volume node_modules inside the container
+      - .:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: ["npm", "test"] # override default command
