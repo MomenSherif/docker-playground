@@ -13,6 +13,7 @@ services:
       - .:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
+      - VARIABLE_FROM_ENV_FILE # if didn't specify value will get from our machine
   tests:
     build:
       context: .
@@ -22,4 +23,4 @@ services:
       - .:/app
     environment:
       - CHOKIDAR_USEPOLLING=true
-    command: ["npm", "test"] # override default command
+    command: ['npm', 'test'] # override default command
