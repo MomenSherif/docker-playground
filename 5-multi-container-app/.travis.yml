@@ -1,0 +1,23 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t momensherif/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker -e CI=true run momensherif/react-test npm test
+
+after_success:
+  - docker build -t momensherif/project-client ./client
+  - docker build -t momensherif/project-nginx ./nginx
+  - docker build -t momensherif/project-server ./server
+  - docker build -t momensherif/project-worker ./worker
+  # Login in to the docker cli
+  - echo "$DOCKER_PASSSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push images to docker hub
+  - docker push momensherif/project-client
+  - docker push momensherif/project-nginx
+  - docker push momensherif/project-server
+  - docker push momensherif/project-worker
